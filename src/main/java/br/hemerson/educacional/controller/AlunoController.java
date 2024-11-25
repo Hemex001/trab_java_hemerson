@@ -15,16 +15,16 @@ import java.util.List;
 public class AlunoController {
 
     @Autowired
-    private AlunoRepository alunoRepository;
+    private AlunoRepository repository;
 
     @GetMapping
     public ResponseEntity<List<Aluno>> findAll() {
-        return ResponseEntity.ok(this.alunoRepository.findAll());
+        return ResponseEntity.ok(this.repository.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Aluno> findById(@PathVariable Integer id) {
-        Aluno aluno = this.alunoRepository.findById(id)
+        Aluno aluno = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado"));
 
         return ResponseEntity.ok(aluno);
@@ -38,13 +38,13 @@ public class AlunoController {
         aluno.setMatricula(dto.matricula());
         aluno.setDataNascimento(dto.dataNascimento());
 
-        Aluno savedAluno = this.alunoRepository.save(aluno);
+        Aluno savedAluno = this.repository.save(aluno);
         return ResponseEntity.ok(savedAluno);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Aluno> update(@PathVariable Integer id, @RequestBody AlunoRequestDTO dto) {
-        Aluno aluno = this.alunoRepository.findById(id)
+        Aluno aluno = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado")); // Use RuntimeException para um exemplo simples
 
         aluno.setNome(dto.nome());
@@ -52,16 +52,16 @@ public class AlunoController {
         aluno.setMatricula(dto.matricula());
         aluno.setDataNascimento(dto.dataNascimento());
 
-        Aluno updatedAluno = this.alunoRepository.save(aluno);
+        Aluno updatedAluno = this.repository.save(aluno);
         return ResponseEntity.ok(updatedAluno);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        Aluno aluno = this.alunoRepository.findById(id)
+        Aluno aluno = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado"));
 
-        this.alunoRepository.delete(aluno);
+        this.repository.delete(aluno);
         return ResponseEntity.noContent().build();
     }
 
