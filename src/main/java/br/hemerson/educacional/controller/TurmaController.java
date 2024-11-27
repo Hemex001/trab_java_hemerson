@@ -42,7 +42,7 @@ public class TurmaController {
     @PutMapping("/{id}")
     public ResponseEntity<Turma> update(@PathVariable Integer id, @RequestBody TurmaRequestDTO dto) {
         Turma turma = this.repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Turma não encontrada")); // Use RuntimeException para um exemplo simples
+                .orElseThrow(() -> new IllegalArgumentException("Turma não encontrada"));
 
         turma.setAno(dto.ano());
         turma.setSemestre(dto.semestre());
@@ -55,7 +55,7 @@ public class TurmaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         Turma turma = this.repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Turma não encontrada")); // Use RuntimeException para um exemplo simples
+                .orElseThrow(() -> new IllegalArgumentException("Turma não encontrada"));
 
         this.repository.delete(turma);
         return ResponseEntity.noContent().build();

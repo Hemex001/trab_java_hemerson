@@ -46,7 +46,7 @@ public class ProfessorController {
     @PutMapping("/{id}")
     public ResponseEntity<Professor> update(@PathVariable Integer id, @RequestBody ProfessorRequestDTO dto) {
         Professor professor = this.repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Professor não encontrado")); // Use RuntimeException para um exemplo simples
+                .orElseThrow(() -> new IllegalArgumentException("Professor não encontrado"));
 
         professor.setNome(dto.nome());
         professor.setEmail(dto.email());

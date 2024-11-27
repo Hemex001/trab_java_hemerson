@@ -45,7 +45,7 @@ public class AlunoController {
     @PutMapping("/{id}")
     public ResponseEntity<Aluno> update(@PathVariable Integer id, @RequestBody AlunoRequestDTO dto) {
         Aluno aluno = this.repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado")); // Use RuntimeException para um exemplo simples
+                .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado"));
 
         aluno.setNome(dto.nome());
         aluno.setEmail(dto.email());

@@ -42,7 +42,7 @@ public class CursoController {
     @PutMapping("/{id}")
     public ResponseEntity<Curso> update(@PathVariable Integer id, @RequestBody CursoRequestDTO dto) {
         Curso curso = this.repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado")); // Use RuntimeException para um exemplo simples
+                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
 
         curso.setNome(dto.nome());
         curso.setCodigo(dto.codigo());
@@ -55,7 +55,7 @@ public class CursoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         Curso curso = this.repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado")); // Use RuntimeException para um exemplo simples
+                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
 
         this.repository.delete(curso);
         return ResponseEntity.noContent().build();

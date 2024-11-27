@@ -1,6 +1,9 @@
 package br.hemerson.educacional.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "cursos")
@@ -17,6 +20,14 @@ public class Curso {
 
     @Column(name = "carga_horaria")
     private Integer cargaHoraria;
+
+    @OneToMany(mappedBy = "curso")
+    @JsonIgnoreProperties("curso")
+    private List<Turma> turmas;
+
+    @OneToMany(mappedBy = "curso")
+    @JsonIgnoreProperties("curso")
+    private List<Disciplina> disciplinas;
 
     public Integer getId() {
         return id;
@@ -48,5 +59,13 @@ public class Curso {
 
     public void setCargaHoraria(Integer cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
+    }
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
     }
 }
